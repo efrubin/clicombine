@@ -1,0 +1,5 @@
+#!/Users/eliasrubin/anaconda/bin/python
+
+import clicombine.cli
+
+clicombine.cli.entry()

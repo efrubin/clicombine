@@ -1,0 +1,28 @@
+{
+ "twelve_meter_filename": "SgrAstar_12m.contsub", 
+ "seven_meter_filename": "SgrAstar_7m.contsub", 
+ "output_basename": "auto", 
+ "weightings": [
+  1.0, 
+  1.0
+ ], 
+ "mode": "channel", 
+ "imagermode": "mosaic", 
+ "spw": "0,4,8,12", 
+ "field": "0~188", 
+ "outframe": "lsrk", 
+ "seven_meter_imsize": 256, 
+ "twelve_meter_imsize": 750, 
+ "seven_meter_cell": "0.5arcsec", 
+ "twelve_meter_cell": "0.145arcsec", 
+ "phasecenter": "J2000 17h45m40.3 -29d00m28", 
+ "robust": 0.5, 
+ "restfreq": "354.505473Ghz", 
+ "start": "-200km/s", 
+ "width": "5.0km/s", 
+ "nchan": 80, 
+ "thresh": "0.0145jy", 
+ "produce_feather": true, 
+ "produce_uv": true, 
+ "moments": ""
+}

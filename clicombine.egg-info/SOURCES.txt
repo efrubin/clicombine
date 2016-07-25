@@ -1,0 +1,15 @@
+setup.py
+bin/cli-combine
+clicombine/__init__.py
+clicombine/additional_casa_commands.py
+clicombine/cli.py
+clicombine/combinedriver.py
+clicombine/combineparser.py
+clicombine/commands.py
+clicombine/utils.py
+clicombine.egg-info/PKG-INFO
+clicombine.egg-info/SOURCES.txt
+clicombine.egg-info/dependency_links.txt
+clicombine.egg-info/not-zip-safe
+clicombine.egg-info/requires.txt
+clicombine.egg-info/top_level.txt
