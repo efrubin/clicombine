@@ -2,7 +2,7 @@ Metadata-Version: 1.0
 Name: clicombine
 Version: 0.1
 Summary: Image combination tool for CASA
-Home-page: UNKNOWN
+Home-page: https://github.com/efrubin/clicombine
 Author: Elias Rubin
 Author-email: erubin@princeton.edu
 License: MIT

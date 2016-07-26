@@ -16,7 +16,8 @@ def param_dict_to_clean_input(param_dict, seven_meter):
     clean_input.update({
         'mode': str(param_dict['mode']),
         'imagermode': str(param_dict['imagermode']),
-        'spw': str(param_dict['spw']),
+        'spw': str(param_dict['seven_meter_spw']) if
+        seven_meter else str(param_dict['twelve_meter_spw']),
         'field': str(param_dict['field']),
         'outframe': str(param_dict['outframe']),
         'imsize': param_dict['seven_meter_imsize'] if

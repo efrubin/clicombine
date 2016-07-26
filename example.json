@@ -1,6 +1,6 @@
 {
- "twelve_meter_filename": "SgrAstar_12m.contsub", 
- "seven_meter_filename": "SgrAstar_7m.contsub", 
+ "twelve_meter_filename": "SgrAstar_12m.cal.contsub", 
+ "seven_meter_filename": "SgrAstar_7m.cal.contsub", 
  "output_basename": "auto", 
  "weightings": [
   1.0, 

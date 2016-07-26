@@ -80,6 +80,7 @@ def _drive_uv(param_dict, clargs, output_basename, casa_instance):
     thresh, clean_args = utils.param_dict_to_clean_input(
         param_dict, seven_meter=False)
 
+    clean_args.update({'spw': param_dict['seven_meter_spw'] + param_dict['twelve_meter_spw']})
     clean_image = drivecasa.commands.clean(
         script,
         concat_vis,
