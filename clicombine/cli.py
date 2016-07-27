@@ -51,6 +51,10 @@ def entry():
 
     group = parser.add_mutually_exclusive_group()
     group.set_defaults(mode="combine")
+    group.add_argument("-g", "--generate",
+                       help="Generate CASA code and write to a file.",
+                       action="store_true",
+                       dest='generate')
     group.add_argument("-e", "--example",
                        help="Create an example config file.",
                        action="store_const",
@@ -83,7 +87,7 @@ def _dispatch(args):
     """
     Dispatch arguments
     """
-    if args.mode == 'combine':
+    if args.mode in ['combine', 'generate']:
         commands.combine(args)
     elif args.mode == 'new':
         commands.new(args)

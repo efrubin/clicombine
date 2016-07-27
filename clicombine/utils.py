@@ -1,5 +1,18 @@
 from __future__ import print_function
+import os
 import sys
+
+
+def output_to_file(script, output_basename):
+    """ 
+    @param script a list of strings
+    @param output_basename a base for a filename
+    returns void
+    IO
+    """
+    with open(os.path.abspath('{}.genscript.py'.format(output_basename)), 'a') as f:
+        for command in script:
+            print(command, file=f)
 
 
 def param_dict_to_clean_input(param_dict, seven_meter):

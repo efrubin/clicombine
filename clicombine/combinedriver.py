@@ -26,7 +26,8 @@ import additional_casa_commands
 def drive(param_dict, clargs):
     """
     Drive the combination process.  This entails generating code for
-    use in the casa interpreter and then running it.
+    use in the casa interpreter and then running it.  If the 'generate' command-line
+    option is invoked, the code will be printed to a file instead of run in the interpreter.
     """
     output_basename = _gen_basename(param_dict, clargs)
 
@@ -37,7 +38,9 @@ def drive(param_dict, clargs):
                 _gen_basename(param_dict, clargs), i)
             i += 1
 
-    casa_instance = drivecasa.Casapy()
+    casa_instance = None
+    if not clargs.generate:
+        casa_instance = drivecasa.Casapy()
 
     if param_dict['produce_uv']:
         _drive_uv(param_dict, clargs, output_basename, casa_instance)
@@ -95,7 +98,12 @@ def _drive_uv(param_dict, clargs, output_basename, casa_instance):
                 script, clean_image.image, clean_image.image, moment)
     if clargs.verbose:
         utils.eprint(script)
-    _ = casa_instance.run_script(script, timeout=None)
+
+    if not clargs.generate:
+        _ = casa_instance.run_script(script, timeout=None)
+
+    if clargs.generate:
+        utils.output_to_file(script, output_basename)
 
     if clargs.verbose:
         utils.eprint("Data products present in {}".format(clean_image))
@@ -141,7 +149,11 @@ def _drive_feather(param_dict, clargs, output_basename, casa_instance):
         other_clean_args=twelve_meter_clean_args,
         out_path=os.path.abspath(output_basename))
 
-    _ = casa_instance.run_script(script, timeout=None)
+    if not clargs.generate:
+        _ = casa_instance.run_script(script, timeout=None)
+
+    if clargs.generate:
+        utils.output_to_file(script, output_basename)
 
     if clargs.verbose:
         utils.eprint('Individual cleanings complete.  Now feathering.')
@@ -157,7 +169,11 @@ def _drive_feather(param_dict, clargs, output_basename, casa_instance):
         utils.eprint("Feather script")
         utils.eprint(script)
 
-    _ = casa_instance.run_script(script, timeout=None)
+    if not clargs.generate:
+        _ = casa_instance.run_script(script, timeout=None)
+
+    if clargs.generate:
+        utils.output_to_file(script, output_basename)
 
     script = []
     if param_dict['moments']:
@@ -168,10 +184,20 @@ def _drive_feather(param_dict, clargs, output_basename, casa_instance):
     if clargs.verbose:
         utils.eprint("Moments")
         utils.eprint(script)
-    _ = casa_instance.run_script(script, timeout=None)
+
+    if not clargs.generate:
+        _ = casa_instance.run_script(script, timeout=None)
+
+    if clargs.generate:
+        utils.output_to_file(script, output_basename)
+
+    return
 
 
 def _calc_feather_weighting(param_dict):
+    """
+    Calculate weightings to use for the feather task
+    """
     weightings = param_dict['weightings']
 
     if not isinstance(weightings, (list, tuple)):
@@ -181,6 +207,9 @@ def _calc_feather_weighting(param_dict):
 
 
 def _gen_basename(param_dict, clargs):
+    """
+    Automatically generate a basename or else use the one provided.
+    """
     if param_dict['output_basename'] in ['', 'auto']:
         return clargs.input_fname.lower().split('.json')[0]
 
